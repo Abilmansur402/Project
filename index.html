@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Life Events</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Random Life Events</h1>
+        <p id="event-text">Нажми кнопку, чтобы получить случайную ситуацию.</p>
+        <button onclick="generateEvent()">Сгенерировать ситуацию</button>
+        <div id="choices" style="display: none;">
+            <button onclick="chooseOption(0)">Вариант 1</button>
+            <button onclick="chooseOption(1)">Вариант 2</button>
+            <button onclick="chooseOption(2)">Вариант 3</button>
+        </div>
+        <p id="result"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
