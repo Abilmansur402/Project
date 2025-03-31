@@ -49,7 +49,6 @@ button:hover {
     background-color: #2980b9;
 }
 
-/* Прогресс-бар */
 .progress-container {
     width: 100%;
     height: 10px;
@@ -66,7 +65,6 @@ button:hover {
     transition: width 0.5s ease-in-out;
 }
 
-/* Темная тема */
 .dark-theme {
     background-color: #2c3e50;
     color: white;
@@ -89,11 +87,12 @@ button:hover {
     background-color: #1abc9c;
 }
 
-/* Переключатель темы */
 .theme-toggle {
     position: absolute;
     top: 15px;
     right: 15px;
+    display: flex;
+    gap: 10px;
 }
 
 #theme-button {
@@ -101,4 +100,38 @@ button:hover {
     border: none;
     font-size: 24px;
     cursor: pointer;
+}
+
+.cyberpunk-theme {
+    background-color: #0d0d0d;
+    color: #00ffcc;
+    font-family: 'Courier New', monospace;
+}
+
+.cyberpunk-theme .container {
+    background-color: #222;
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+.cyberpunk-theme button {
+    background-color: #ff00ff;
+    color: white;
+    border: 2px solid #ff00ff;
+}
+
+.cyberpunk-theme button:hover {
+    background-color: #cc00cc;
+}
+
+.cyberpunk-theme .progress-bar {
+    background-color: #ff00ff;
+}
+
+#event-image {
+    display: none;
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 10px 0;
 }
