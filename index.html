@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Life Events</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="theme-toggle">
+        <button id="theme-button">🌙</button>
+    </div>
+    
     <div class="container">
         <h1>Случайные жизненные ситуации</h1>
-        <p id="event-text">Нажми кнопку, чтобы получить случайную ситуацию.</p>
-        <button onclick="generateEvent()">Сгенерировать ситуацию</button>
+        <p id="event-text">Нажмите "Начать игру", чтобы получить первую ситуацию.</p>
+        <button id="start-button">Начать игру</button>
         <div id="choices"></div>
         <p id="result"></p>
-        <button id="next-event" style="display: none;" onclick="generateEvent()">Следующее событие</button>
+        <button id="next-event" style="display: none;">Следующее событие</button>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

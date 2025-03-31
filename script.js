@@ -4,7 +4,7 @@ const events = [
         choices: [
             { text: "Искать через GPS", result: "Ты нашел телефон, но потратил 2 часа." },
             { text: "Попросить помощи у прохожих", result: "Ты наткнулся на мошенников и потерял деньги." },
-            { text: "Зайти в ближайший магазин электроники", result: "Ты купил новый телефон, но потратил много денег." }
+            { text: "Купить новый телефон", result: "Ты потратил много денег, но телефон теперь у тебя." }
         ]
     },
     {
@@ -12,15 +12,7 @@ const events = [
         choices: [
             { text: "Сказать правду", result: "Работодатель оценил честность и дал второй шанс." },
             { text: "Солгать про пробку", result: "Тебя разоблачили, и ты потерял шанс на работу." },
-            { text: "Извиниться и предложить пересмотреть время", result: "Работодатель согласился и назначил новую встречу." }
-        ]
-    },
-    {
-        text: "Ты увидел как Абдулла переезжает к террористам, и ему предлагают бесплантный тур поездку в Сирию",
-        choices: [
-            { text: "Предупредить его, что это фанатики", result: "Абдулла не поверил и отправился в тур поездку,где его нашли и сделали шахидом." },
-            { text: "Поговорить с Раха аби с главой секты и рассказать правду", result: "Раха аби пригрозил вам, сказав что уничтожит Актау с помощью талибанов." },
-            { text: "Забить на это и дать выбор воле", result: "После долгих лет и пройденных войн вы встречаете Абдуллу в секте вахабитов в Афаганистане с 5 жёнами." }
+            { text: "Извиниться и попросить новое время", result: "Работодатель согласился и дал шанс." }
         ]
     },
     {
@@ -33,14 +25,32 @@ const events = [
     }
 ];
 
-let currentEvent;
+let currentEventIndex = 0;
+let totalEvents = events.length;
+let progress = 0;
+
+document.getElementById("start-button").addEventListener("click", startGame);
+document.getElementById("next-event").addEventListener("click", generateEvent);
+document.getElementById("theme-button").addEventListener("click", toggleTheme);
+
+function startGame() {
+    document.getElementById("start-button").style.display = "none";
+    generateEvent();
+}
 
 function generateEvent() {
-    currentEvent = events[Math.floor(Math.random() * events.length)];
+    if (currentEventIndex >= totalEvents) {
+        document.getElementById("event-text").innerText = "Игра завершена!";
+        document.getElementById("choices").innerHTML = "";
+        document.getElementById("next-event").style.display = "none";
+        return;
+    }
+
+    let currentEvent = events[currentEventIndex];
     document.getElementById("event-text").innerText = currentEvent.text;
-    
+
     const choicesDiv = document.getElementById("choices");
-    choicesDiv.innerHTML = ""; // Очищаем старые кнопки
+    choicesDiv.innerHTML = "";
 
     currentEvent.choices.forEach((choice, index) => {
         let btn = document.createElement("button");
@@ -49,19 +59,28 @@ function generateEvent() {
         choicesDiv.appendChild(btn);
     });
 
-    choicesDiv.style.display = "block";
     document.getElementById("result").innerText = "";
-    document.getElementById("next-event").style.display = "none"; // Скрываем кнопку "Следующее событие"
+    document.getElementById("next-event").style.display = "none";
 }
 
 function chooseOption(index) {
+    let currentEvent = events[currentEventIndex];
     document.getElementById("result").innerText = currentEvent.choices[index].result;
 
-    // Отключаем кнопки после выбора
     document.querySelectorAll("#choices button").forEach(btn => {
         btn.disabled = true;
     });
 
-    // Показываем кнопку "Следующее событие"
     document.getElementById("next-event").style.display = "block";
+
+    progress += 100 / totalEvents;
+    document.getElementById("progress-bar").style.width = `${progress}%`;
+
+    currentEventIndex++;
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("dark-theme");
+    const themeButton = document.getElementById("theme-button");
+    themeButton.textContent = document.body.classList.contains("dark-theme") ? "☀️" : "🌙";
 }
